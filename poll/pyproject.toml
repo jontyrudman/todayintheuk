@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "poll"
+version = "0.1.0"
+description = "Poll legislation and news feeds"
+authors = ["Jonathan Rudman <jonathan.rudman@live.co.uk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+feedparser = "^6.0.10"
+sqlalchemy = "^2.0.22"
+requests = "^2.31.0"
+pydantic = "^2.4.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
