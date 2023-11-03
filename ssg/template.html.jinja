@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>todayin.uk</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+  <h1>Bills before Parliament<h1>
+  <ul id="bills">
+    {% for bill in bills %}
+      <li class="bill">
+        <h2>{{ bill.title|e }}</h2>
+        <div>Origin: {{ bill.originating_house }}</div>
+        <div>Status: {{ bill.current_stage.description }}{{ bill.current_stage.house }}</div>
+        {% if not bill.defeated %}
+        <progress class="bill-progress" value="{{ bill.progress }}" max="100">{{bill.progress}}%</progress>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

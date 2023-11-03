@@ -1,8 +1,6 @@
 import logging
 import datetime
 from typing import Optional
-from os import PathLike
-import json
 
 import requests
 from pydantic import BaseModel, Field
@@ -121,10 +119,3 @@ def fetch_bills(
             logging.error(e)
 
     return bill_objs
-
-
-def write_bill_list_as_json(path: PathLike, data: list[Bill]):
-    if not isinstance(data, list):
-        raise TypeError("Must provide a list of bills")
-    with open(path, "w") as file:
-        file.write(json.dumps([x.model_dump_json() for x in data]))
