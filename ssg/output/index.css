@@ -5,27 +5,30 @@
 }
 
 @font-face {
-  font-family: 'LibreBaskerville';
-  src: url('fonts/LibreBaskerville-Regular.ttf')  format('truetype');
+  font-family: "LibreBaskerville";
+  src: url("fonts/LibreBaskerville-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'LibreBaskerville';
-  src: url('fonts/LibreBaskerville-Bold.ttf')  format('truetype');
+  font-family: "LibreBaskerville";
+  src: url("fonts/LibreBaskerville-Bold.ttf") format("truetype");
   font-weight: bold;
 }
 
 @font-face {
-  font-family: 'LibreBaskerville';
-  src: url('fonts/LibreBaskerville-Italic.ttf')  format('truetype');
+  font-family: "LibreBaskerville";
+  src: url("fonts/LibreBaskerville-Italic.ttf") format("truetype");
   font-style: italic;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-size: 14px;
   font-family: LibreBaskerville, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 body {
@@ -54,20 +57,19 @@ a:hover {
   color: var(--hover-color);
 }
 
-main {
-  display: grid;
-  grid-template-columns: 4fr 8fr;
-  gap: 2rem;
-  margin-bottom: 1rem;
-}
+
+/* Header */
 
 .header {
   display: grid;
   grid-template-columns: auto auto;
+  grid-template-rows: auto;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--text-color);
   margin-bottom: 1rem;
+  gap: 0.5rem;
+  padding: 0;
 }
 
 .site-title {
@@ -88,15 +90,67 @@ main {
   font-style: italic;
 }
 
-.section-heading {
-  margin: .5rem 0;
+.updated-daily {
+  visibility: visible;
+  height: auto;
 }
+
+@media (max-width: 40rem) {
+  .header {
+    grid-template-columns: auto;
+    justify-items: center;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .top-matter {
+    text-align: left;
+  }
+
+  .updated-daily {
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+
+/* Content */
+
+main {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  grid-template-rows: auto;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 40rem) {
+  main {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+}
+
+.section-heading {
+  margin: 0.5rem 0;
+}
+
+
+/* Parliament */
 
 ul.bill-list {
   margin: 0;
   list-style: none;
   padding: 0;
   border-top: 1px solid var(--text-color);
+}
+
+@media (max-width: 40rem) {
+  ul.bill-list {
+    max-height: 30rem;
+    overflow: auto;
+  }
 }
 
 li.bill {
@@ -120,36 +174,33 @@ li.bill {
 progress[value].bill-progress {
   /* Reset the default appearance */
   -webkit-appearance: none;
- -moz-appearance: none;
+  -moz-appearance: none;
   appearance: none;
-
   height: 5px;
 }
 
-progress[value].bill-progress::-webkit-progress-bar, progress[value].bill-progress::-moz-progress-bar {
+progress[value].bill-progress::-webkit-progress-bar,
+progress[value].bill-progress::-moz-progress-bar {
   background-color: var(--text-color);
   border-radius: 0;
 }
+
+
+/* News */
 
 ul.news-list {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-ul.news-list li.news-group {
-  /* margin: 1rem 0; */
+  border-top: 1px solid var(--text-color);
 }
 
 .news-group {
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: minmax(0, 3fr) 9fr;
+  grid-template-rows: auto;
   align-items: center;
   gap: 1rem;
-}
-
-ul.news-list {
-  border-top: 1px solid var(--text-color);
 }
 
 ul.news-list li.news-group {
@@ -163,6 +214,20 @@ ul.news-list li.news-group:last-child {
 .news-org-name {
   margin: 0;
   text-align: center;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 40rem) {
+  .news-group {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    gap: 0;
+    padding-top: 1rem;
+  }
+
+  .news-org-name {
+    text-align: left;
+  }
 }
 
 ul.news-article-list {
@@ -177,13 +242,26 @@ li.news-article {
   margin: 0.5rem 0;
 }
 
+
+/* Footer */
+
 #footer {
   display: grid;
   grid-template-columns: 9fr 3fr;
+  grid-template-rows: auto;
   padding: 1rem 0;
   border-top: 1px solid var(--text-color);
+  gap: 1rem;
 }
 
 #footer .footer-section:last-child {
   text-align: right;
+}
+
+@media (max-width: 70rem) {
+  #footer {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    text-align: right;
+  }
 }
