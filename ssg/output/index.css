@@ -1,0 +1,12 @@
+ul.bill-list {
+  list-style: none;
+  padding: 0;
+}
+
+li.bill {
+  margin: 1rem 0;
+}
+
+.bill-title {
+  margin: 0;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>todayin.uk</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <h1 id="bills">Recent Activity on Bills</h1>
+  <ul class="bill-list">
+    {% for bill in bills %}
+      <li class="bill">
+        <h2 class="bill-title">{{ bill.title }}</h2>
+        <div>Origin: {{ bill.originating_house }}</div>
+        <div>
+          Status: {{ bill.current_stage.description }}
+          {% if bill.current_stage.house != 'Unassigned' %}
+          , {{ bill.current_stage.house }}
+          {% endif %}
+        </div>
+        {% if not bill.defeated %}
+        <progress class="bill-progress" value="{{ bill.progress() }}" max="100">{{bill.progress()}}%</progress>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

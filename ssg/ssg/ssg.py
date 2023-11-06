@@ -1,17 +1,16 @@
-import poll.legislation.bills
+import datetime
 
+from jinja2 import Environment, PackageLoader, select_autoescape
+from poll.legislation import bills
 
-class Bill(poll.legislation.bills.Bill):
-    def as_html(self):
-        """
-        Represent bill as HTML.
+env = Environment(
+    loader=PackageLoader("ssg"),
+    autoescape=select_autoescape()
+)
 
-        Element order:
+template = env.get_template("template.html.jinja")
+bill_objs = bills.fetch_bills_up_to_date(dt=datetime.datetime(2023, 11, 3))
+output = template.render(bills=bill_objs)
 
-        1. Title
-        2. Origin
-        3. Status
-        4. Progress bar, if applicable
-        """
-        # TODO
-        pass
+with open("output/index.html", "w") as f:
+    f.write(output)

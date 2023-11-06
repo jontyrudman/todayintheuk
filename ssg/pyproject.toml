@@ -7,7 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-poll = {path = "../poll"}
+jinja2 = "^3.1.2"
+poll = {path = "../poll", develop = true}
 
 [tool.pyright]
 venvPath = "."
