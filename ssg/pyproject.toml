@@ -14,6 +14,9 @@ poll = {path = "../poll", develop = true}
 venvPath = "."
 venv = ".venv"
 
+[tool.poetry.scripts]
+todayin-ssg = "ssg.ssg:cli"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
