@@ -2,7 +2,7 @@ import datetime
 import argparse
 
 from jinja2 import Environment, PackageLoader, select_autoescape
-from poll import bills
+from poll import bills, news
 
 
 def parse_args():
@@ -25,8 +25,13 @@ def cli():
     jinja_env = Environment(loader=PackageLoader("ssg"), autoescape=select_autoescape())
     template = jinja_env.get_template("template.html.jinja")
 
+    # Get bills
     bill_objs = bills.fetch_bills_up_to_date(dt=datetime.datetime.fromisoformat(args.bills_since))
-    output_str = template.render(bills=bill_objs)
+    # Get news
+    news_dicts = news.fetch_feeds()
+
+    # Render template
+    output_str = template.render(bills=bill_objs, news=news_dicts)
 
     if args.output:
         with open(args.output, "w") as f:
