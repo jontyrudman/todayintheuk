@@ -10,3 +10,13 @@ li.bill {
 .bill-title {
   margin: 0;
 }
+
+.bill-origin::before {
+  content: "Origin: ";
+  font-weight: bold;
+}
+
+.bill-status::before {
+  content: "Status: ";
+  font-weight: bold;
+}

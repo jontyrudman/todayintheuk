@@ -14,13 +14,22 @@
   <ul class="bill-list">
     {% for bill in bills %}
       <li class="bill">
-        <h2 class="bill-title">{{ bill.title }}</h2>
-        <div>Origin: {{ bill.originating_house }}</div>
+        <h2 class="bill-title"><a href="{{ bill.link }}" target="_blank">{{ bill.title }}</a></h2>
+        <div class="bill-origin">{{ bill.originating_house }}</div>
+        {% if bill.act %}
+          <div class="bill-status">New act of Parliament</div>
+        {% elif bill.defeated %}
+          <div class="bill-status">Bill defeated</div>
+        {% else %}
+          <div class="bill-status">
+            {{ bill.current_stage.description }}
+            {% if bill.current_stage.house != 'Unassigned' %}
+            in {{ bill.current_stage.house }}
+            {% endif %}
+          </div>
+        {% endif %}
         <div>
-          Status: {{ bill.current_stage.description }}
-          {% if bill.current_stage.house != 'Unassigned' %}
-          , {{ bill.current_stage.house }}
-          {% endif %}
+          Updated at {{ bill.updated_timestamp.strftime('%Y-%m-%d %H:%M') }}
         </div>
         {% if not bill.defeated %}
         <progress class="bill-progress" value="{{ bill.progress() }}" max="100">{{bill.progress()}}%</progress>
