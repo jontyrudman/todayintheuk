@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>todayin.uk</title>
+  <title>Today in the UK</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="index.css">
 </head>
 
+{% set MAX_BILLS, MAX_ARTICLES = 10, 10 %}
+
 <body>
   <div class="header">
     <div class="site-title">
-      <h1>Today in the U.K.</h1>
+      <h1>Today in the UK</h1>
     </div>
     <div class="top-matter">
       <div>Updated daily</div>
@@ -23,7 +25,7 @@
     <section id="bills">
       <h2 class="section-heading">Parliament</h2>
       <ul class="bill-list">
-        {% for bill in bills[:10] %}
+        {% for bill in bills[:MAX_BILLS] %}
           <li class="bill">
             <h4 class="bill-title"><a href="{{ bill.link }}" target="_blank">{{ bill.title }}</a></h4>
             <div class="bill-origin">{{ bill.originating_house }}</div>
@@ -56,7 +58,7 @@
         <li class="news-group">
           <h3 class="news-org-name">{{ org.name }}</h3>
           <ul class="news-article-list">
-            {% for article in org['data']['entries'][:10] %}
+            {% for article in org['data']['entries'][:MAX_ARTICLES] %}
             <li class="news-article">
               <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
             </li>
@@ -67,5 +69,15 @@
       </ul>
     </section>
   </main>
+  <div id="footer">
+    <div class="footer-section">
+      Bills and acts are the {{ MAX_BILLS }} most recently updated in the last 7 days from <a href="https://bills-api.parliament.uk/index.html" target="_blank">parliament's API</a>.
+      <br />
+      News articles are the first {{ MAX_ARTICLES }} on each news organisation's UK-specific RSS/Atom feed.
+    </div>
+    <div class="footer-section">
+      Created by <a href="https://jnthn.me" target="_blank">Jonathan Rudman</a>.
+    </div>
+  </div>
 </body>
 </html>

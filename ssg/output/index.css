@@ -176,3 +176,14 @@ ul.news-article-list {
 li.news-article {
   margin: 0.5rem 0;
 }
+
+#footer {
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+  padding: 1rem 0;
+  border-top: 1px solid var(--text-color);
+}
+
+#footer .footer-section:last-child {
+  text-align: right;
+}
