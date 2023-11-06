@@ -1,0 +1,4 @@
+*.pyc
+dist
+__pycache__
+ssg/output/index.html
