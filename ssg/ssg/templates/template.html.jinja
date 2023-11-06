@@ -10,32 +10,62 @@
 </head>
 
 <body>
-  <h1 id="bills">Recent Activity on Bills</h1>
-  <ul class="bill-list">
-    {% for bill in bills %}
-      <li class="bill">
-        <h2 class="bill-title"><a href="{{ bill.link }}" target="_blank">{{ bill.title }}</a></h2>
-        <div class="bill-origin">{{ bill.originating_house }}</div>
-        {% if bill.act %}
-          <div class="bill-status">New act of Parliament</div>
-        {% elif bill.defeated %}
-          <div class="bill-status">Bill defeated</div>
-        {% else %}
-          <div class="bill-status">
-            {{ bill.current_stage.description }}
-            {% if bill.current_stage.house != 'Unassigned' %}
-            in {{ bill.current_stage.house }}
+  <div class="header">
+    <div class="site-title">
+      <h1>Today in the U.K.</h1>
+    </div>
+    <div class="top-matter">
+      <div>Updated daily</div>
+      <div>Compiled at {{ compile_dt.time().strftime('%H:%M') }} on {{ compile_dt.date().strftime('%d %B %Y') }}</div>
+    </div>
+  </div>
+  <main>
+    <section id="bills">
+      <h2 class="section-heading">Parliament</h2>
+      <ul class="bill-list">
+        {% for bill in bills[:10] %}
+          <li class="bill">
+            <h4 class="bill-title"><a href="{{ bill.link }}" target="_blank">{{ bill.title }}</a></h4>
+            <div class="bill-origin">{{ bill.originating_house }}</div>
+            {% if bill.act %}
+              <div class="bill-status">New act of Parliament</div>
+            {% elif bill.defeated %}
+              <div class="bill-status">Bill defeated</div>
+            {% else %}
+              <div class="bill-status">
+                {{ bill.current_stage.description }}
+                {% if bill.current_stage.house != 'Unassigned' %}
+                in {{ bill.current_stage.house }}
+                {% endif %}
+              </div>
             {% endif %}
-          </div>
-        {% endif %}
-        <div>
-          Updated at {{ bill.updated_timestamp.strftime('%Y-%m-%d %H:%M') }}
-        </div>
-        {% if not bill.defeated %}
-        <progress class="bill-progress" value="{{ bill.progress() }}" max="100">{{bill.progress()}}%</progress>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+            <div>
+              Updated at {{ bill.updated_timestamp.strftime('%Y-%m-%d %H:%M') }}
+            </div>
+            {% if not bill.defeated and not bill.act %}
+            <progress class="bill-progress" value="{{ bill.progress() }}" max="100">{{bill.progress()}}%</progress>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section id="news">
+      <h2 class="section-heading">News</h2>
+      <ul class="news-list">
+        {% for org in news.values() %}
+        <li class="news-group">
+          <h3 class="news-org-name">{{ org.name }}</h3>
+          <ul class="news-article-list">
+            {% for article in org['data']['entries'][:10] %}
+            <li class="news-article">
+              <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

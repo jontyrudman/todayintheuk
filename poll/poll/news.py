@@ -12,7 +12,7 @@ FEEDS = {
         "name": "The Independent",
         "url": "https://www.independent.co.uk/news/uk/rss",
     },
-    "gbnews": {"name": "GBNews", "url": "https://www.gbnews.com/feeds/news/uk.rss"},
+    "gbnews": {"name": "GB News", "url": "https://www.gbnews.com/feeds/news/uk.rss"},
     "dailymail": {
         "name": "Daily Mail",
         "url": "https://www.dailymail.co.uk/news/index.rss",

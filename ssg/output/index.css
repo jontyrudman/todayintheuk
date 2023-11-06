@@ -1,6 +1,102 @@
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --hover-color: #555;
+}
+
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('fonts/LibreBaskerville-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('fonts/LibreBaskerville-Bold.ttf')  format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'LibreBaskerville';
+  src: url('fonts/LibreBaskerville-Italic.ttf')  format('truetype');
+  font-style: italic;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: LibreBaskerville, sans-serif;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 70%;
+  max-width: 80rem;
+}
+
+@media (max-width: 70rem) {
+  body {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+a {
+  color: var(--text-color);
+}
+
+a:visited {
+  color: var(--text-color);
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.site-title {
+  padding: 0.5rem 1rem;
+  font-style: italic;
+  font-weight: bold;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  white-space: nowrap;
+}
+
+.site-title h1 {
+  margin: 0;
+}
+
+.top-matter {
+  text-align: right;
+  font-style: italic;
+}
+
+.section-heading {
+  margin: .5rem 0;
+}
+
 ul.bill-list {
+  margin: 0;
   list-style: none;
   padding: 0;
+  border-top: 1px solid var(--text-color);
 }
 
 li.bill {
@@ -19,4 +115,64 @@ li.bill {
 .bill-status::before {
   content: "Status: ";
   font-weight: bold;
+}
+
+progress[value].bill-progress {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+ -moz-appearance: none;
+  appearance: none;
+
+  height: 5px;
+}
+
+progress[value].bill-progress::-webkit-progress-bar, progress[value].bill-progress::-moz-progress-bar {
+  background-color: var(--text-color);
+  border-radius: 0;
+}
+
+ul.news-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.news-list li.news-group {
+  /* margin: 1rem 0; */
+}
+
+.news-group {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+ul.news-list {
+  border-top: 1px solid var(--text-color);
+}
+
+ul.news-list li.news-group {
+  border-bottom: 1px solid var(--text-color);
+}
+
+ul.news-list li.news-group:last-child {
+  border-bottom: none;
+}
+
+.news-org-name {
+  margin: 0;
+  text-align: center;
+}
+
+ul.news-article-list {
+  max-height: 12rem;
+  overflow: auto;
+  padding: 0;
+  list-style: none;
+  margin: 0.5rem 0;
+}
+
+li.news-article {
+  margin: 0.5rem 0;
 }

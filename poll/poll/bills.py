@@ -62,12 +62,19 @@ class Bill(BaseModel):
                 + Bill.progress_stage_ids["unassigned"]
             )
         else:
-            raise ValueError("originating_house must be 'Lords' or 'Commons'")
+            return 0
 
-        return int(
-            (stage_ids.index(self.current_stage.id) / (len(stage_ids) - 1))
-            * 100
-        )
+        try:
+            progress = int(
+                (stage_ids.index(self.current_stage.id) / (len(stage_ids) - 1))
+                * 100
+            )
+        except ValueError as e:
+            logging.error(e)
+            logging.debug(self)
+            return 0
+
+        return progress
 
 
 def fetch_most_recent_session() -> int:
