@@ -5,6 +5,9 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '55 6 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,12 +34,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Use Python 3.11
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11' 
       - name: Install Poetry
         uses: snok/install-poetry@v1
-      - run: poetry install && poetry run today-ssg -o ../output/index.html
+      - name: Generate files
+        run: poetry install && poetry run today-ssg -o ../output/index.html
         working-directory: ssg
       - name: Setup Pages
         uses: actions/configure-pages@v3
