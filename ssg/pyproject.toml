@@ -15,7 +15,7 @@ venvPath = "."
 venv = ".venv"
 
 [tool.poetry.scripts]
-todayin-ssg = "ssg.ssg:cli"
+today-ssg = "ssg.ssg:cli"
 
 [build-system]
 requires = ["poetry-core"]
