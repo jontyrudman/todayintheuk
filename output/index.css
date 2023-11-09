@@ -144,12 +144,14 @@ ul.bill-list {
   list-style: none;
   padding: 0;
   border-top: 1px solid var(--text-color);
+  border-bottom: 1px solid lightgrey;
+  overflow: auto;
+  max-height: 84.35rem;
 }
 
 @media (max-width: 40rem) {
   ul.bill-list {
     max-height: 30rem;
-    overflow: auto;
   }
 }
 
