@@ -27,7 +27,7 @@ def cli():
     # Logging
     if args.log:
         logging.basicConfig(
-            level=logging.INFO,
+            level=logging.DEBUG,
             filename=args.log,
             format="%(asctime)s;%(levelname)s;%(message)s",
             filemode="w",

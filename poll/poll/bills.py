@@ -70,7 +70,7 @@ class Bill(BaseModel):
                 * 100
             )
         except ValueError as e:
-            logging.error(e)
+            logging.error(f"Error getting bill progress: {e}")
             logging.debug(self)
             return 0
 
