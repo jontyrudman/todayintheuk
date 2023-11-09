@@ -57,13 +57,19 @@
         {% for org in news.values() %}
         <li class="news-group">
           <h3 class="news-org-name">{{ org.name }}</h3>
-          <ul class="news-article-list">
-            {% for article in org['data']['entries'][:MAX_ARTICLES] %}
-            <li class="news-article">
-              <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-            </li>
-            {% endfor %}
-          </ul>
+          {% if 'data' in org.keys() %}
+            <ul class="news-article-list">
+              {% for article in org['data']['entries'][:MAX_ARTICLES] %}
+              <li class="news-article">
+                <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          {% elif 'error' in org.keys() %}
+            <p>{{ org['error'] }}</p>
+          {% else %}
+            <p>An error occurred.</p>
+          {% endif %}
         </li>
         {% endfor %}
       </ul>
