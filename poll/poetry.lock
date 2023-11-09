@@ -422,6 +422,20 @@ pluggy = ">=0.12,<2.0"
 testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
+name = "pytest-socket"
+version = "0.6.0"
+description = "Pytest Plugin to disable socket calls during tests"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "pytest_socket-0.6.0-py3-none-any.whl", hash = "sha256:cca72f134ff01e0023c402e78d31b32e68da3efdf3493bf7788f8eba86a6824c"},
+    {file = "pytest_socket-0.6.0.tar.gz", hash = "sha256:363c1d67228315d4fc7912f1aabfd570de29d0e3db6217d61db5728adacd7138"},
+]
+
+[package.dependencies]
+pytest = ">=3.6.3"
+
+[[package]]
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
@@ -569,4 +583,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "74217308c9a3e41d40f552c6b7dfc5f518f0d75f986493565a0ef0db10a8bb89"
+content-hash = "387968faa6b8f9bbbee4c8ce6dabacf31641a893302f35dcdea8fff80b0453b8"
