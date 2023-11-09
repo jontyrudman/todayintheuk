@@ -1,0 +1,3 @@
+- [ ] Check that the bills API returns some expected structure
+- [ ] Check that each RSS feed request returns some expected structure
+- [ ] Check that, upon a (synthetic) request failure, an exception is raised
