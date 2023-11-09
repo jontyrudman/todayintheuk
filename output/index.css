@@ -216,11 +216,7 @@ ul.news-list {
 }
 
 ul.news-list li.news-group {
-  border-bottom: 1px solid var(--text-color);
-}
-
-ul.news-list li.news-group:last-child {
-  border-bottom: none;
+  border-bottom: 1px solid lightgrey;
 }
 
 .news-org-name {
@@ -243,11 +239,9 @@ ul.news-list li.news-group:last-child {
 }
 
 ul.news-article-list {
-  max-height: 12rem;
+  max-height: 14rem;
   overflow: auto;
-  padding: 0;
-  list-style: none;
-  margin: 0.5rem 0;
+  list-style: square;
 }
 
 li.news-article {
