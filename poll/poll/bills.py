@@ -47,6 +47,8 @@ class Bill(BaseModel):
     def progress(self) -> int:
         """
         Returns a percentage of progress based on the current stage.
+        
+        -1 means error occurred, most likely not on normal bill passage.
         """
         stage_ids = []
         if self.originating_house.lower() == "commons":
@@ -62,7 +64,7 @@ class Bill(BaseModel):
                 + Bill.progress_stage_ids["unassigned"]
             )
         else:
-            return 0
+            return -1
 
         try:
             progress = int(
@@ -72,7 +74,7 @@ class Bill(BaseModel):
         except ValueError as e:
             logging.error(f"Error getting bill progress: {e}")
             logging.debug(self)
-            return 0
+            return -1
 
         return progress
 
