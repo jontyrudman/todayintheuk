@@ -5,10 +5,11 @@
   <title>Today in the UK</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
-  <link rel="icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="stylesheet" href="index.css" />
+  <script src="script.js"></script>
 </head>
 
 {% set MAX_BILLS, MAX_ARTICLES = 20, 10 %}
@@ -52,6 +53,7 @@
           </li>
         {% endfor %}
       </ul>
+      <button class="show-more"></button>
     </section>
     <section id="news">
       <h2 class="section-heading">News</h2>
@@ -67,6 +69,7 @@
               </li>
               {% endfor %}
             </ul>
+            <button class="show-more"></button>
           {% elif 'error' in org.keys() %}
             <p>{{ org['error'] }}</p>
           {% else %}
