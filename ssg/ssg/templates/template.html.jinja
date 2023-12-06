@@ -48,7 +48,14 @@
               Updated at {{ bill.updated_timestamp.strftime('%Y-%m-%d %H:%M') }}
             </div>
             {% if not bill.defeated and not bill.act %}
-            <progress class="bill-progress" value="{{ bill.progress() }}" max="100">{{bill.progress()}}%</progress>
+              {% set progress = bill.progress() %}
+              {% if progress == -1 %}
+              <div>
+                Bill progress hard to quantify. <a href="{{ bill.link }}" target="_blank">Inspect.</a>
+              </div>
+              {% else %}
+                <progress class="bill-progress" value="{{ progress }}" max="100">{{ progress }}%</progress>
+              {% endif %}
             {% endif %}
           </li>
         {% endfor %}

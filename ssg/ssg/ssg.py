@@ -6,8 +6,16 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from poll import bills, news
 
 
+LOG_LEVELS = {
+    "debug": logging.DEBUG,
+    "info": logging.INFO,
+    "error": logging.ERROR,
+    "warn": logging.WARN,
+}
+
+
 def parse_args():
-    parser = argparse.ArgumentParser(prog="todayin static site generator")
+    parser = argparse.ArgumentParser(prog="todayintheuk static site generator")
     default_dt = datetime.datetime.now() - datetime.timedelta(days=7)
     parser.add_argument(
         "-s",
@@ -16,7 +24,13 @@ def parse_args():
         default=default_dt.isoformat(),
     )
     parser.add_argument("-o", "--output", nargs="?", help="output to file")
-    parser.add_argument("--log", nargs="?", help="output debug log to file")
+    parser.add_argument(
+        "--log-level",
+        nargs="?",
+        help="set log level",
+        choices=LOG_LEVELS.keys(),
+        default="info",
+    )
 
     return parser.parse_args()
 
@@ -25,12 +39,10 @@ def cli():
     args = parse_args()
 
     # Logging
-    if args.log:
+    if args.log_level:
         logging.basicConfig(
-            level=logging.DEBUG,
-            filename=args.log,
+            level=LOG_LEVELS[args.log_level],
             format="%(asctime)s;%(levelname)s;%(message)s",
-            filemode="w",
         )
 
     jinja_env = Environment(loader=PackageLoader("ssg"), autoescape=select_autoescape())

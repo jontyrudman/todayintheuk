@@ -28,9 +28,11 @@ def fetch_feeds() -> dict:
     loaded_dict = {}
 
     for k, v in FEEDS.items():
+        logging.info(f"Fetching news from {v['name']}...")
         try:
             feed = feedparser.parse(v["url"])
             loaded_dict[k] = {**v, "data": feed}
+            logging.debug(f"Fetched data into dict: {loaded_dict[k]}")
         except Exception as e:
             logging.error(e)
             loaded_dict[k] = {**v, "error": f"{v['name']} could not be retrieved."}
