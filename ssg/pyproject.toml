@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 jinja2 = "^3.1.2"
 poll = {path = "../poll", develop = true}
+pip = "^23.3.2"
 
 [tool.pyright]
 venvPath = "."
