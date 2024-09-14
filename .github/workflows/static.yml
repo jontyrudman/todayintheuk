@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Use Python 3.11
         uses: actions/setup-python@v4
         with:
@@ -43,10 +43,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: './output'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
