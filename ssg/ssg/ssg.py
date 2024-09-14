@@ -1,4 +1,5 @@
 import datetime
+from zoneinfo import ZoneInfo
 import argparse
 import logging
 
@@ -57,7 +58,7 @@ def cli():
 
     # Render template
     output_str = template.render(
-        bills=bill_objs, news=news_dicts, compile_dt=datetime.datetime.now()
+        bills=bill_objs, news=news_dicts, compile_dt=datetime.datetime.now(ZoneInfo("Europe/London"))
     )
 
     if args.output:

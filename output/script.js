@@ -5,7 +5,7 @@
 function showMore() {
   const ul = this.previousElementSibling;
   var showingMore = false;
-  
+
   Array.from(ul.children).forEach(c => {
     if (c.classList.contains("opt-hidden")) {
       if (c.getAttribute("hidden")) {
@@ -33,8 +33,8 @@ function showMore() {
   }
 }
 
-function convertRemToPixels(rem) {    
-    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+function convertRemToPixels(rem) {
+  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
 window.addEventListener("load", () => {
@@ -70,6 +70,11 @@ window.addEventListener("load", () => {
     .querySelector("button.show-more")
     .innerHTML = "Show More (" + String(countBillHidden) + ")";
 
+  // Hide show more if nothing more to show
+  if (countBillHidden === 0) {
+    billList.parentElement.querySelector("button.show-more").style.display = "none";
+  }
+
   // Each news article list
   newsArticleLists.forEach(list => {
     var countArticleHidden = 0;
@@ -84,5 +89,10 @@ window.addEventListener("load", () => {
       .parentElement
       .querySelector("button.show-more")
       .innerHTML = "Show More (" + String(countArticleHidden) + ")";
+
+    // Hide show more if nothing more to show
+    if (countArticleHidden === 0) {
+      list.parentElement.querySelector("button.show-more").style.display = "none";
+    }
   })
 });

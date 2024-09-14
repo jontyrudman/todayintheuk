@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Today in the UK</title>
@@ -30,37 +31,40 @@
       <h2 class="section-heading">Parliament</h2>
       <ul class="bill-list">
         {% for bill in bills[:MAX_BILLS] %}
-          <li class="bill">
-            <h4 class="bill-title"><a href="{{ bill.link }}" target="_blank">{{ bill.title }}</a></h4>
-            <div class="bill-origin">{{ bill.originating_house }}</div>
-            {% if bill.act %}
-              <div class="bill-status">New act of Parliament</div>
-            {% elif bill.defeated %}
-              <div class="bill-status">Bill defeated</div>
-            {% else %}
-              <div class="bill-status">
-                {{ bill.current_stage.description }}
-                {% if bill.current_stage.house != 'Unassigned' %}
-                in {{ bill.current_stage.house }}
-                {% endif %}
-              </div>
+        <li class="bill">
+          <h4 class="bill-title"><a href="{{ bill.link }}" target="_blank">{{ bill.title }}</a></h4>
+          <div class="bill-origin">{{ bill.originating_house }}</div>
+          {% if bill.act %}
+          <div class="bill-status">New act of Parliament</div>
+          {% elif bill.defeated %}
+          <div class="bill-status">Bill defeated</div>
+          {% else %}
+          <div class="bill-status">
+            {{ bill.current_stage.description }}
+            {% if bill.current_stage.house != 'Unassigned' %}
+            in {{ bill.current_stage.house }}
             {% endif %}
-            <div>
-              Updated at {{ bill.updated_timestamp.strftime('%Y-%m-%d %H:%M') }}
-            </div>
-            {% if not bill.defeated and not bill.act %}
-              {% set progress = bill.progress() %}
-              {% if progress == -1 %}
-              <div>
-                Bill progress hard to quantify. <a href="{{ bill.link }}" target="_blank">Inspect.</a>
-              </div>
-              {% else %}
-                <progress class="bill-progress" value="{{ progress }}" max="100">{{ progress }}%</progress>
-              {% endif %}
-            {% endif %}
-          </li>
+          </div>
+          {% endif %}
+          <div>
+            Updated at {{ bill.updated_timestamp.strftime('%Y-%m-%d %H:%M') }}
+          </div>
+          {% if not bill.defeated and not bill.act %}
+          {% set progress = bill.progress() %}
+          {% if progress == -1 %}
+          <div>
+            Bill progress hard to quantify. <a href="{{ bill.link }}" target="_blank">Inspect.</a>
+          </div>
+          {% else %}
+          <progress class="bill-progress" value="{{ progress }}" max="100">{{ progress }}%</progress>
+          {% endif %}
+          {% endif %}
+        </li>
         {% endfor %}
       </ul>
+      {% if bills|length == 0 %}
+      <p>No recent activity.</p>
+      {% endif %}
       <button class="show-more"></button>
     </section>
     <section id="news">
@@ -70,18 +74,21 @@
         <li class="news-group">
           <h3 class="news-org-name">{{ org.name }}</h3>
           {% if 'data' in org.keys() %}
-            <ul class="news-article-list">
-              {% for article in org['data']['entries'][:MAX_ARTICLES] %}
-              <li class="news-article">
-                <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
-              </li>
-              {% endfor %}
-            </ul>
-            <button class="show-more"></button>
+          <ul class="news-article-list">
+            {% for article in org['data']['entries'][:MAX_ARTICLES] %}
+            <li class="news-article">
+              <a href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% if org['data']['entries']|length == 0 %}
+          <p>No news. Something might have broken.</p>
+          {% endif %}
+          <button class="show-more"></button>
           {% elif 'error' in org.keys() %}
-            <p>{{ org['error'] }}</p>
+          <p>{{ org['error'] }}</p>
           {% else %}
-            <p>An error occurred.</p>
+          <p>An error occurred.</p>
           {% endif %}
         </li>
         {% endfor %}
@@ -90,7 +97,8 @@
   </main>
   <div id="footer">
     <div class="footer-section">
-      Bills and acts are the {{ MAX_BILLS }} most recently updated in the last 7 days from <a href="https://bills-api.parliament.uk/index.html" target="_blank">parliament's API</a>.
+      Bills and acts are the {{ MAX_BILLS }} most recently updated in the last 7 days from <a
+        href="https://bills-api.parliament.uk/index.html" target="_blank">parliament's API</a>.
       <br />
       News articles are the first {{ MAX_ARTICLES }} on each news organisation's UK-specific RSS/Atom feed.
     </div>
@@ -99,4 +107,5 @@
     </div>
   </div>
 </body>
+
 </html>
