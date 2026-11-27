@@ -52,7 +52,6 @@ jobs:
         uses: actions/deploy-pages@v4
 
   workflow-keepalive:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     permissions:
       actions: write
